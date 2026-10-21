@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `count_wet_days` and the `WET_DAY_THRESHOLD_MM` constant.
+- A Copilot skill for writing template-based pull request descriptions with
+  verified validation results and AI assistance disclosure.
 
 ### Fixed
 
