@@ -17,6 +17,19 @@ def test_mean_of_three_values() -> None:
     assert mean([1.0, 2.0, 3.0]) == 2.0
 
 
+@pytest.mark.parametrize("values_mm", [[], ()])
+def test_mean_rejects_empty_values(values_mm: list[float] | tuple[float, ...]) -> None:
+    with pytest.raises(EmptyRecordsError, match="expected at least one rainfall value"):
+        mean(values_mm)
+
+
+@pytest.mark.parametrize("values_mm", [[0.0], [0.0, 0.0], (2.5,)])
+def test_mean_accepts_non_empty_values(
+    values_mm: list[float] | tuple[float, ...],
+) -> None:
+    assert mean(values_mm) == pytest.approx(sum(values_mm) / len(values_mm))
+
+
 def test_moving_average_returns_values() -> None:
     assert len(moving_average([1.0, 2.0, 3.0, 4.0], 2)) > 0
 

@@ -3,6 +3,7 @@
 from collections.abc import Sequence
 
 from rainfall._validation import validate_records
+from rainfall.exceptions import EmptyRecordsError
 from rainfall.types import Record
 
 WET_DAY_THRESHOLD_MM = 1.0
@@ -43,7 +44,14 @@ def mean(values_mm: Sequence[float]) -> float:
     -------
     float
         The mean rainfall in millimetres.
+
+    Raises
+    ------
+    EmptyRecordsError
+        If no rainfall values are supplied.
     """
+    if not values_mm:
+        raise EmptyRecordsError("expected at least one rainfall value")
     return sum(values_mm) / len(values_mm)
 
 
